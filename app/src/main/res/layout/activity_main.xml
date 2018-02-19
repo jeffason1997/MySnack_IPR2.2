@@ -8,16 +8,21 @@
 
     <EditText
         android:id="@+id/MainScreen_UserField"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:ems="10"
         android:hint="User"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/MainScreen_PasswordField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MainScreen_WelcomeText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/MainScreen_WelcomeText"
@@ -37,10 +42,33 @@
         android:id="@+id/MainScreen_PasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/MainScreen_LoginButton"
         app:layout_constraintEnd_toEndOf="@+id/MainScreen_UserField"
-        app:layout_constraintTop_toBottomOf="@+id/MainScreen_UserField" />
+        app:layout_constraintStart_toStartOf="@+id/MainScreen_UserField" />
+
+    <Button
+        android:id="@+id/MainScreen_LoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/MainScreen_SigninButton"
+        app:layout_constraintEnd_toEndOf="@+id/MainScreen_PasswordField"
+        app:layout_constraintStart_toStartOf="@+id/MainScreen_PasswordField" />
+
+    <Button
+        android:id="@+id/MainScreen_SigninButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Sign in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/MainScreen_LoginButton"
+        app:layout_constraintStart_toStartOf="@+id/MainScreen_LoginButton" />
+
 </android.support.constraint.ConstraintLayout>
