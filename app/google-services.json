@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "414317100245",
+    "firebase_url": "https://mysnackipr22.firebaseio.com",
+    "project_id": "mysnackipr22",
+    "storage_bucket": "mysnackipr22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414317100245:android:22020a9806fa08bd",
+        "android_client_info": {
+          "package_name": "com.jldev.mysnack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414317100245-63hg9d6lm7v9b02o961cmst45lirh21l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jldev.mysnack",
+            "certificate_hash": "b020020a4df28d41e89076adb42e13cfb4b4b4b2"
+          }
+        },
+        {
+          "client_id": "414317100245-5f5aeorrja3e4jeubpq9ddfr67nun331.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-ZBPE0Vewmnha9oCsNBmDXN75XYYeT5Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414317100245-5f5aeorrja3e4jeubpq9ddfr67nun331.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
