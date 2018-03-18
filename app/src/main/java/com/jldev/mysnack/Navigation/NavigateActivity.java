@@ -129,11 +129,6 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         Toast.makeText(NavigateActivity.this, "Nearby Restaurants", Toast.LENGTH_LONG).show();
     }
 
-    private GeoApiContext getGeoContext() {
-        GeoApiContext geoApiContext = new GeoApiContext();
-        return geoApiContext.setQueryRateLimit(3)                .setApiKey(getString(R.string.directionsApiKey))                .setConnectTimeout(1, TimeUnit.SECONDS)                .setReadTimeout(1, TimeUnit.SECONDS)                .setWriteTimeout(1, TimeUnit.SECONDS);
-    }
-
     private boolean CheckGooglePlayServices() {
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
         int result = googleAPI.isGooglePlayServicesAvailable(this);
