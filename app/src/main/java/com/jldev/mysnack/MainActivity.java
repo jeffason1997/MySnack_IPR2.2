@@ -3,11 +3,9 @@ package com.jldev.mysnack;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,9 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.jldev.mysnack.Navigation.NavigateActivity;
 
 public class MainActivity extends Activity {
 
@@ -121,7 +117,7 @@ public class MainActivity extends Activity {
 
     public void updateUI(FirebaseUser currentUser) {
         if(currentUser!=null){
-            Intent intent = new Intent(this, ChooseActivity.class);
+            Intent intent = new Intent(this, NavigateActivity.class);
             startActivity(intent);
         } else{
             System.out.println("still yeahboiy");
