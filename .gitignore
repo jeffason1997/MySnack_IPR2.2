@@ -16,6 +16,10 @@ bin/
 gen/
 out/
 
+# Jeff Edits
+.gradle\4.1\*\*.bin
+.gradle\4.1\*\*.lock
+
 # Gradle files
 .gradle/
 build/
