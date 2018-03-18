@@ -50,8 +50,8 @@
       <file leaf-file-name="NavigateActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jldev/mysnack/Navigation/NavigateActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="131" column="21" lean-forward="false" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
+            <state relative-caret-position="315">
+              <caret line="129" column="5" lean-forward="false" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#onCreate#0;class#NavigateActivity#0" expanded="false" />
@@ -62,7 +62,7 @@
                 <element signature="method#buildGoogleApiClient#0;class#NavigateActivity#0" expanded="false" />
                 <element signature="method#onConnected#0;class#NavigateActivity#0" expanded="false" />
                 <element signature="method#getUrl#0;class#NavigateActivity#0" expanded="false" />
-                <element signature="e#7103#7145#0" expanded="true" />
+                <element signature="e#6718#6760#0" expanded="true" />
                 <element signature="method#onConnectionSuspended#0;class#NavigateActivity#0" expanded="false" />
                 <element signature="method#onLocationChanged#0;class#NavigateActivity#0" expanded="false" />
                 <element signature="method#onConnectionFailed#0;class#NavigateActivity#0" expanded="false" />
@@ -2186,7 +2186,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521414958819" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521415033808" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2234,7 +2234,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521414958819" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521415033808" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2417,7 +2417,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521414958820" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521415033810" />
       </method>
     </configuration>
     <list size="1">
@@ -2612,7 +2612,7 @@
             <element signature="method#buildGoogleApiClient#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onConnected#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#getUrl#0;class#NavigateActivity#0" expanded="false" />
-            <element signature="e#7103#7145#0" expanded="true" />
+            <element signature="e#6718#6760#0" expanded="true" />
             <element signature="method#onConnectionSuspended#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onLocationChanged#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onConnectionFailed#0;class#NavigateActivity#0" expanded="false" />
@@ -2667,7 +2667,7 @@
             <element signature="method#buildGoogleApiClient#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onConnected#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#getUrl#0;class#NavigateActivity#0" expanded="false" />
-            <element signature="e#7103#7145#0" expanded="true" />
+            <element signature="e#6718#6760#0" expanded="true" />
             <element signature="method#onConnectionSuspended#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onLocationChanged#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onConnectionFailed#0;class#NavigateActivity#0" expanded="false" />
@@ -2924,8 +2924,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jldev/mysnack/Navigation/NavigateActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="131" column="21" lean-forward="false" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
+        <state relative-caret-position="315">
+          <caret line="129" column="5" lean-forward="false" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#onCreate#0;class#NavigateActivity#0" expanded="false" />
@@ -2936,7 +2936,7 @@
             <element signature="method#buildGoogleApiClient#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onConnected#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#getUrl#0;class#NavigateActivity#0" expanded="false" />
-            <element signature="e#7103#7145#0" expanded="true" />
+            <element signature="e#6718#6760#0" expanded="true" />
             <element signature="method#onConnectionSuspended#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onLocationChanged#0;class#NavigateActivity#0" expanded="false" />
             <element signature="method#onConnectionFailed#0;class#NavigateActivity#0" expanded="false" />
