@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jldev.mysnack.Navigation.NavigateClasses.GetNearbyPlacesData;
+import com.jldev.mysnack.Navigation.RouteClasses.RouteHandler;
 import com.jldev.mysnack.R;
 
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,8 @@ import java.util.concurrent.TimeUnit;
 public class NavigateActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        GoogleMap.OnInfoWindowClickListener{
 
     private GoogleMap mMap;
     double latitude;
@@ -46,6 +48,8 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
+    RouteHandler handler;
+    Button start, exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,43 +94,61 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
 
 
         mMap.clear();
-        final Button start = (Button) findViewById(R.id.btn_Start);
-        start.setOnClickListener(new View.OnClickListener() {
+        mMap.setOnInfoWindowClickListener(this);
+
+        exit = (Button) findViewById(R.id.btn_Exit);
+        exit.setVisibility(View.GONE);
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                    GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                    String url = getUrl(latitude, longitude, "restaurants");
-                    Object[] DataTransfer = new Object[2];
-                    DataTransfer[0] = mMap;
-                    DataTransfer[1] = url;
-                    getNearbyPlacesData.execute(DataTransfer);
-
-
-
-                    GetNearbyPlacesData getNearbyPlacesData2 = new GetNearbyPlacesData();
-                    String url2 = getUrl(latitude, longitude, "bar");
-                    Object[] DataTransfer2 = new Object[2];
-                    DataTransfer2[0] = mMap;
-                    DataTransfer2[1] = url2;
-                    getNearbyPlacesData2.execute(DataTransfer2);
-
-
-
-                    GetNearbyPlacesData getNearbyPlacesData3 = new GetNearbyPlacesData();
-                    String url3 = getUrl(latitude, longitude, "food");
-                    Object[] DataTransfer3 = new Object[2];
-                    DataTransfer3[0] = mMap;
-                    DataTransfer3[1] = url3;
-                    getNearbyPlacesData3.execute(DataTransfer3);
-                    start.setVisibility(View.GONE);
-
-
+                mMap.clear();
+                setUpPlaces();
+                exit.setVisibility(View.GONE);
+                handler = null;
             }
         });
 
+
+        start = (Button) findViewById(R.id.btn_Start);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.clear();
+                setUpPlaces();
+                start.setVisibility(View.GONE);
+            }
+        });
+
+
+
         Toast.makeText(NavigateActivity.this, "Nearby Restaurants", Toast.LENGTH_LONG).show();
+    }
+
+    private void setUpPlaces(){
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        String url = getUrl(latitude, longitude, "restaurants");
+        Object[] DataTransfer = new Object[2];
+        DataTransfer[0] = mMap;
+        DataTransfer[1] = url;
+        getNearbyPlacesData.execute(DataTransfer);
+
+
+
+        GetNearbyPlacesData getNearbyPlacesData2 = new GetNearbyPlacesData();
+        String url2 = getUrl(latitude, longitude, "bar");
+        Object[] DataTransfer2 = new Object[2];
+        DataTransfer2[0] = mMap;
+        DataTransfer2[1] = url2;
+        getNearbyPlacesData2.execute(DataTransfer2);
+
+
+
+        GetNearbyPlacesData getNearbyPlacesData3 = new GetNearbyPlacesData();
+        String url3 = getUrl(latitude, longitude, "food");
+        Object[] DataTransfer3 = new Object[2];
+        DataTransfer3[0] = mMap;
+        DataTransfer3[1] = url3;
+        getNearbyPlacesData3.execute(DataTransfer3);
     }
 
     private boolean CheckGooglePlayServices() {
@@ -172,7 +194,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&key=" + getString(R.string.Server_google_maps_key));
         googlePlacesUrl.append("&sensor=true");
-        Log.d("getUrl", googlePlacesUrl.toString());
+        Log.d("getUrl LOOK HERE :", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
     }
 
@@ -185,24 +207,13 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
     public void onLocationChanged(Location location) {
         Log.d("onLocationChanged", "entered");
 
-        mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
-        //Place current location marker
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
         Toast.makeText(NavigateActivity.this, "Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f", latitude, longitude));
@@ -255,8 +266,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -285,6 +295,21 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
 
             // other 'case' lines to check for other permissions this app might request.
             // You can add here other case statements according to your requirement.
+        }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        if (handler==null) {
+            mMap.clear();
+            LatLng origin = new LatLng(latitude, longitude);
+            handler = new RouteHandler(this, origin, marker.getPosition(), mMap);
+            MarkerOptions dest = new MarkerOptions();
+            dest.position(marker.getPosition());
+            dest.title(marker.getTitle());
+            mMap.addMarker(dest);
+            exit.setVisibility(View.VISIBLE);
+
         }
     }
 }
