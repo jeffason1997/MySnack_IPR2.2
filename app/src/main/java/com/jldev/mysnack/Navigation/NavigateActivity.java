@@ -1,12 +1,16 @@
 package com.jldev.mysnack.Navigation;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,15 +27,19 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.jldev.mysnack.Navigation.NavigateClasses.GetNearbyPlacesData;
-import com.jldev.mysnack.Navigation.RouteClasses.RouteHandler;
+import com.jldev.mysnack.Navigation.NavigateClasses.RouteHandler;
 import com.jldev.mysnack.R;
-
-import java.util.concurrent.TimeUnit;
+import com.jldev.mysnack.Reviews.DetailedReviewActivity;
+import com.jldev.mysnack.Reviews.WriteReviewActivity;
 
 
 public class NavigateActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -40,6 +48,8 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
         LocationListener,
         GoogleMap.OnInfoWindowClickListener{
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     private GoogleMap mMap;
     double latitude;
     double longitude;
@@ -50,6 +60,7 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
     LocationRequest mLocationRequest;
     RouteHandler handler;
     Button start, exit;
+    CharSequence options[] = new CharSequence[] {"Navigate","See Reviews", "Write Review"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,10 +129,6 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
                 start.setVisibility(View.GONE);
             }
         });
-
-
-
-        Toast.makeText(NavigateActivity.this, "Nearby Restaurants", Toast.LENGTH_LONG).show();
     }
 
     private void setUpPlaces(){
@@ -300,6 +307,30 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("What do you want to do");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which==0){
+                    handleNavigateOption(marker);
+                } else if (which==1){
+                    handleReadOption(marker);
+                } else if (which==2){
+                    handleWriteOption(marker);
+                } else {
+                    System.out.println("CANCEL");
+                }
+            }
+        });
+        builder.show();
+
+
+
+    }
+
+    void handleNavigateOption(Marker marker){
         if (handler==null) {
             mMap.clear();
             LatLng origin = new LatLng(latitude, longitude);
@@ -311,5 +342,30 @@ public class NavigateActivity extends AppCompatActivity implements OnMapReadyCal
             exit.setVisibility(View.VISIBLE);
 
         }
+    }
+
+    void handleReadOption(Marker marker){
+        db.collection("users").document(user).collection("places").document(marker.getTitle()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    if(task.getResult().exists()){
+                        Intent i = new  Intent(getApplicationContext(), DetailedReviewActivity.class);
+                        i.putExtra("NAME",marker.getTitle());
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(NavigateActivity.this, "No Reviews Available.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
+
+    void handleWriteOption(Marker marker){
+        Intent intent = new Intent(getApplicationContext(), WriteReviewActivity.class);
+        intent.putExtra("NAME", marker.getTitle());
+        intent.putExtra("LAT",marker.getPosition().latitude);
+        intent.putExtra("LNG",marker.getPosition().longitude);
+        startActivity(intent);
     }
 }

@@ -117,7 +117,8 @@ public class MainActivity extends Activity {
 
     public void updateUI(FirebaseUser currentUser) {
         if(currentUser!=null){
-            Intent intent = new Intent(this, NavigateActivity.class);
+            System.out.println(currentUser.getEmail());
+            Intent intent = new Intent(this, ChooseActivity.class);
             startActivity(intent);
         } else{
             System.out.println("still yeahboiy");
