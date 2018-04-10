@@ -37,7 +37,7 @@ public class ChooseActivity extends Activity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayAdapter mAdapter;
     private String document = mAuth.getCurrentUser().getEmail();
-    private ArrayList<String> MENU = new ArrayList<>(Arrays.asList("Navigation","Reviews"));
+    private ArrayList<String> MENU = new ArrayList<>(Arrays.asList("Navigation","Reviews","Sign Out"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,11 @@ public class ChooseActivity extends Activity {
                 } else if(i==1){
                     Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
                     startActivity(intent);
-                } else {
+                }else if(i==2) {
+                    mAuth.signOut();
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                }else {
                     Toast.makeText(ChooseActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -73,6 +77,7 @@ public class ChooseActivity extends Activity {
                 if(!task.getResult().exists()){
                    Map<String, Object> user = new HashMap<>();
                     user.put("Email",mAuth.getCurrentUser().getEmail());
+                    user.put("First Login",new Date());
                     db.collection("users").document(document).set(user)
                             .addOnSuccessListener(documentReference -> Log.d("SUCCES", " user detailes:" + user.toString()))
                             .addOnFailureListener(e -> Log.w("FAILED", " detailes:" + e));
